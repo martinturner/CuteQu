@@ -1,0 +1,1 @@
+json.partial! "dining_tables/dining_table", dining_table: @dining_table

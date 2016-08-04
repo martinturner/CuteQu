@@ -1,0 +1,1 @@
+json.array! @dining_tables, partial: 'dining_tables/dining_table', as: :dining_table
