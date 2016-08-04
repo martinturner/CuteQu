@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
-    @food_orders = FoodOrder.all
+    @food_orders = Customer.all
   end
 
   # GET /customers/1
