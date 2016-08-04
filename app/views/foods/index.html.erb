@@ -18,9 +18,8 @@
     <% @foods.each do |food| %>
       <tr>
         <td><%= food.category %></td>
-        <td><%= attachment_image_tag(product.images.first, :file, :fill, 450, 450) %></td>
+	      <td><%= link_to (image_tag food.image.url(:medium), class: 'image'), food %></td>
         <td><%= food.price %></td>
-        <td><%= food.description %></td>
         <td><%= food.customize %></td>
         <td><%= link_to 'Show', food %></td>
         <td><%= link_to 'Edit', edit_food_path(food) %></td>

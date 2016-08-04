@@ -1,4 +1,4 @@
-<%= form_for(@food) do |f| %>
+<%= form_for @food, html: { multipart: true } do |f| %>
   <% if @food.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
@@ -29,8 +29,8 @@
     <%= f.text_area :customize %>
   </div>
   <div class="field">
-    <%= f.label :images_files %><br>
-    <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %>
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
   </div>
   <div class="actions">
     <%= f.submit %>
