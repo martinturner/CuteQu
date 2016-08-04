@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: food_orders
+#
+#  id         :integer          not null, primary key
+#  food_id    :jsonb
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
