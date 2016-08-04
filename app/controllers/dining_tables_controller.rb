@@ -69,6 +69,6 @@ class DiningTablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dining_table_params
-      params.require(:dining_table).permit(:customer_id)
+      params.require(:dining_table).permit(:customer_id, :name)
     end
 end

@@ -13,10 +13,24 @@
   <tbody>
     <% @dining_tables.each do |dining_table| %>
       <tr>
-        <td><%= dining_table.customer_id %></td>
-        <td><%= link_to 'Show', dining_table %></td>
-        <td><%= link_to 'Edit', edit_dining_table_path(dining_table) %></td>
-        <td><%= link_to 'Destroy', dining_table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="vertical-align:middle;" >Table <%= dining_table.name %></td>
+        <td style="vertical-align:middle;">
+          <div>
+           <div class="led-box">
+             <div class="led-green"></div>
+           </div>
+          </div>
+        </td>
+        <td style="vertical-align:middle;">
+          <select name="post[person_id]" id="post_person_id">
+            <option value="">Customer</option>
+            <option value="1">Robert</option>
+            <option value="2">John</option>
+            <option value="3">David</option>
+            <option value="4">Madge</option>
+          </select>
+          <button type="button">Reset</button>
+        </td>
       </tr>
     <% end %>
   </tbody>
