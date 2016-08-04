@@ -22,9 +22,9 @@ development:
 test:
   <<: *default
   host: localhost
-  database: cuteq_test
+  database: cuteq
 
 production:
   <<: *default
   host: localhost
-  database: cuteq_production
+  database: cuteq
