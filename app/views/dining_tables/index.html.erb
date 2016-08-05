@@ -4,6 +4,7 @@
 
 <table>
   <thead>
+    <%= include_gon %>
     <tr>
       <th>Customer</th>
       <th colspan="3"></th>
@@ -17,7 +18,7 @@
         <td style="vertical-align:middle;">
           <div>
            <div class="led-box">
-             <div id="<%= dining_table.id %>" class="led-green"></div>
+             <div id="<%= dining_table.id %>" class="<%= dining_table.get_css%>"></div>
            </div>
           </div>
         </td>
@@ -35,40 +36,66 @@
           <div class="form-group">
             <label for="select" class="col-lg-2 control-label"></label>
             <div class="col-lg-10">
-              <select class="form-control" id="select" <%= f.select :customer_id, options_for_select(@customers.map{|cus| [cus.name,cus.id]}) %>
+              <%= f.select :customer_id, options_for_select(@customers.map{|cus| [cus.name,cus.id]}), prompt: 'Select Customer', id: "#{dining_table.id}-customer-select" %>
             </div>
+          </div>
+          <div class="actions">
           </div>
         <% end %>
         </td>
 
         <td>
-          <button class="available" data-id="<%= dining_table.id %>" >Assign</button>
-          <button class="unavailable" data-id="<%= dining_table.id %>">Reset</button>
+          <button class="available" id="<%= dining_table.id %>" >Assign</button>
+          <button class="unavailable" id="<%= dining_table.id %>">Reset</button>
+          <td><%= link_to 'Destroy', dining_table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <%= link_to 'New Dining table', new_dining_table_path %>
 
 <script>
+var customerId = 0
+
 $('.available').click(function(){
-  var $self = $(this);
-  var id_box = $self.data("id");
-  console.log(id_box)
-  document.getElementById(id_box).className = "led-red";
+  var dining_tables_url = "<%= dining_table_update_customer_path(id: :dining_table_id).html_safe %>";
+  var tableId = this.id;
+  var customerId = $(this).parent().parent().find("#dining_table_customer_id").val();
+
+  $("#" + tableId).attr("class", "led-red");
+  dining_tables_url = dining_tables_url.replace("dining_table_id", tableId);
+  data = {customer_id: customerId};
+
+  $.ajax({
+    method: "PATCH",
+    url: dining_tables_url,
+    data: data
+  })
+  .then(function(res){
+    console.log(res);
+  });
 });
 
 $('.unavailable').click(function(){
-  var $self = $(this);
-  var id_box = $self.data("id");
-  console.log(id_box)
-  document.getElementById(id_box).className = "led-green";
+  var dining_tables_url = "<%= dining_table_update_customer_path(id: :dining_table_id).html_safe %>";
+  var tableId = this.id;
+  console.log("dining_table_id = " + tableId, "customer_id = " + customerId);
+
+  $("#" + tableId).attr("class", "led-green");
+  dining_tables_url = dining_tables_url.replace("dining_table_id", tableId)
+  data = {customer_id: null};
+
+  $.ajax({
+    method: "PATCH",
+    url: dining_tables_url,
+    data: data
+  })
+  .then(function(res){
+    console.log(res);
+  });
 });
-
-
-
 </script>
