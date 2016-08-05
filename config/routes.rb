@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   resources :customers
   resources :dining_tables
 
+  patch 'dining_tables/:id/update_customer' => 'dining_tables#update_customer', as: "dining_table_update_customer"
+
+
+
     root 'customers#new'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

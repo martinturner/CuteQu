@@ -15,7 +15,7 @@
   <tbody>
     <% @customers.each do |customer| %>
       <tr>
-        <td><%= customer.pk_template_name %></td>
+        <td><%= customer.name %></td>
         <td><%= customer.order_id %></td>
         <td><%= customer.total_price %></td>
         <td><%= link_to 'Show', customer %></td>
