@@ -1,0 +1,38 @@
+  <div class="portlet-body" style="display: block;">
+    <div class="panel-group accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" href="#collapse3">
+              <%= title%></a>
+          </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse in">
+          <div class="panel-body">
+            <div class="row">
+              <% foods.each do |food|%>
+                <div class="col-sm-6 col-md-3">
+                  <div class="thumbnail">
+              	     <%= link_to (image_tag food.image.url(:medium), class: 'image'), food %>
+                     <button class='food' id= '<%= food.id %>'>add</button>
+                     <%= link_to 'Destroy', food, class: 'btn btn-flat btn-danger',method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <%= food.price %>
+                     <%= food.name %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+var cart = []
+  $('.food').click(function() {
+    var foodId = this.id;
+    cart.push(foodId)
+    console.log(cart)
+  });
+</script>
