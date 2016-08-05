@@ -17,19 +17,33 @@
         <td style="vertical-align:middle;">
           <div>
            <div class="led-box">
-             <div class="led-green"></div>
+             <div id="<%= dining_table.id %>" class="led-green"></div>
            </div>
           </div>
         </td>
-        <td style="vertical-align:middle;">
-          <select name="post[person_id]" id="post_person_id">
-            <option value="">Customer</option>
-            <option value="1">Robert</option>
-            <option value="2">John</option>
-            <option value="3">David</option>
-            <option value="4">Madge</option>
-          </select>
-          <button type="button">Reset</button>
+        <td><%= form_for(@dining_table) do |f| %>
+          <% if @dining_table.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@dining_table.errors.count, "error") %> prohibited this dining_table from being saved:</h2>
+              <ul>
+              <% @dining_table.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group">
+            <label for="select" class="col-lg-2 control-label"></label>
+            <div class="col-lg-10">
+              <select class="form-control" id="select" <%= f.select :customer_id, options_for_select(@customers.map{|cus| [cus.name,cus.id]}) %>
+            </div>
+          </div>
+        <% end %>
+        </td>
+
+        <td>
+          <button class="available" data-id="<%= dining_table.id %>" >Assign</button>
+          <button class="unavailable" data-id="<%= dining_table.id %>">Reset</button>
         </td>
       </tr>
     <% end %>
@@ -39,3 +53,22 @@
 <br>
 
 <%= link_to 'New Dining table', new_dining_table_path %>
+
+<script>
+$('.available').click(function(){
+  var $self = $(this);
+  var id_box = $self.data("id");
+  console.log(id_box)
+  document.getElementById(id_box).className = "led-red";
+});
+
+$('.unavailable').click(function(){
+  var $self = $(this);
+  var id_box = $self.data("id");
+  console.log(id_box)
+  document.getElementById(id_box).className = "led-green";
+});
+
+
+
+</script>
