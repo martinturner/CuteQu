@@ -5,6 +5,8 @@ class DiningTablesController < ApplicationController
   # GET /dining_tables.json
   def index
     @dining_tables = DiningTable.all
+    @customers = Customer.where(diningtable_id: nil)
+    @dining_table = DiningTable.new
   end
 
   # GET /dining_tables/1
@@ -15,6 +17,7 @@ class DiningTablesController < ApplicationController
   # GET /dining_tables/new
   def new
     @dining_table = DiningTable.new
+    @customers = Customer.all
   end
 
   # GET /dining_tables/1/edit
