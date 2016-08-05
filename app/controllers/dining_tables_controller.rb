@@ -1,17 +1,20 @@
 class DiningTablesController < ApplicationController
-  before_action :set_dining_table, only: [:show, :edit, :update, :destroy]
+  before_action :set_dining_table, only: [:show, :edit, :update, :destroy, :update_customer]
 
   # GET /dining_tables
   # GET /dining_tables.json
   def index
-    @dining_tables = DiningTable.all
+    @dining_tables = DiningTable.all.order(:id)
     @customers = Customer.where(diningtable_id: nil)
     @dining_table = DiningTable.new
+    gon.dining_table = @dining_tables
   end
 
   # GET /dining_tables/1
   # GET /dining_tables/1.json
   def show
+    @customers = Customer.where(diningtable_id: nil)
+    @dining_tables = DiningTable.all
   end
 
   # GET /dining_tables/new
@@ -52,6 +55,12 @@ class DiningTablesController < ApplicationController
         format.json { render json: @dining_table.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_customer
+    @dining_table.customer_id = params[:customer_id];
+
+    return render :json => {success: @dining_table.save!}
   end
 
   # DELETE /dining_tables/1

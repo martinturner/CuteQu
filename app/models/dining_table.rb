@@ -11,4 +11,12 @@
 
 class DiningTable < ActiveRecord::Base
   has_one :customer
+
+  def get_css
+    if(customer_id.nil?)
+      return "led-green"
+    else
+      return "led-red"
+    end
+  end
 end
