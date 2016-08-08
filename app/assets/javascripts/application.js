@@ -29,8 +29,5 @@
 //= assets/pages/scripts/dashboard.min.js
 //= assets/global/scripts/app.min.js
 //= assets/layouts/layout3/scripts/layout.min.js
-//= require bootstrap-material-design
 //= require turbolinks
 //= require_tree .
-
-$.material.init()

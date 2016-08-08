@@ -10,60 +10,82 @@
     </div>
   <% end %>
 <div class=container>
-  <div class="col-md-9">
+  <div class="col-md-12">
     <div class="portlet box green">
       <div class="portlet-title">
         <div class="caption">
             <i class="icon-settings font-dark"></i>
             <span class="caption-subject font-dark sbold uppercase">New Food Item</span>
         </div>
+      </div>
         <div class="portlet-body form">
-            <form class="form-horizontal" role="form">
+            <form action="#" class="form-horizontal">
                 <div class="form-body">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Categories</label>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <% categories = ["Starter", "Main Course", "Dessert"] %>
                                 <%= f.select :category, categories, :prompt => @food.category %>
                             </div>
                     </div>
+                </div>
+                <div class="form-body">
                     <div class="form-group">
-                      
+                      <label class="col-md-3 control-label">Food Name</label>
+                        <div class="col-md-4">
+                          <div class="input-group">
+                            <input type="text" class="form-control input-circle" placeholder="Name of Food">
+                          </div>
+                        </div>
                     </div>
+                </div>
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Customize</label>
+                        <div class="col-md-4">
+                          <div class="input-group">
+                          <input type="text" class="form-control input-circle" placeholder="Customize">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-body">
                     <div class="form-group">
                       <label class="col-md-3 control-label">Price</label>
-                          <div class="col-md-9">
+                          <div class="col-md-4">
                             <div class="input-group">
                               <input type="text" class="form-control input-circle" placeholder="Enter Price">
                             </div>
                           </div>
                     </div>
+                </div>
+                <div class="form-body">
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Add Image</label>
+                      <div class="col-md-4">
+                          <div class="fileinput fileinput-new" data-provides="fileinput">
+                              <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                  <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image">
+                              </div>
+                                <span class="btn default btn-file">
+                                  <span class="fileinput-new">Select Image</span>
+                                </span>
+                          </div>
+                     </div>
+                  </div>
+                </div>
 
-              </form>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn btn-circle green">Submit</button>
+                            <button type="button" class="btn btn-circle grey-salsa btn-outline">Cancel</button>
+                        </div>
+                    </div>
+               </div>
+          </form>
         </div>
       </div>
     </div>
-  </div>
-</div>
-  <div class="field">
-    <% categories = ["Starter", "Main Course", "Dessert"] %>
-    <%= f.select :category, categories, :prompt => @food.category %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_area :name %>
-  </div>
-  <div class="field">
-    <%= f.label :customize %><br>
-    <%= f.text_area :customize %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>
