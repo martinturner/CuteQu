@@ -35,7 +35,6 @@
           <div class="form-group">
             <label for="select" class="col-lg-2 control-label"></label>
             <div class="col-lg-10">
-
               <select class="form-control" onchange="getval(this);" <%= f.select :customer_id, options_for_select(@customers.map{|cus| [cus.name,cus.id]}), prompt: 'Select Customer' %>
             </div>
           </div>

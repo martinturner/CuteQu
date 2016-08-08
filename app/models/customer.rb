@@ -8,6 +8,8 @@
 #  total_price      :decimal(, )
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  diningtable_id   :integer
+#  name             :text
 #
 
 class Customer < ActiveRecord::Base

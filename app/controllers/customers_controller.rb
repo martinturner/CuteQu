@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :update_dining_table]
 
   # GET /customers
   # GET /customers.json
@@ -52,6 +52,11 @@ class CustomersController < ApplicationController
     end
   end
 
+  def update_dining_table
+    @customer.diningtable_id = params[:diningtable_id];
+    return render :json => {success: @customer.save!}
+  end
+
   # DELETE /customers/1
   # DELETE /customers/1.json
   def destroy
@@ -70,6 +75,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:pk_template_name, :order_id, :total_price, :name, :dining_table)
+      params.require(:customer).permit(:pk_template_name, :order_id, :total_price, :name, :diningtable_id)
     end
 end

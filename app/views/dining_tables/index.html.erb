@@ -15,6 +15,7 @@
     <% @dining_tables.each do |dining_table| %>
       <tr>
         <td style="vertical-align:middle;" >Table <%= dining_table.name %></td>
+        <td id="name"></td>
         <td style="vertical-align:middle;">
           <div>
            <div class="led-box">
@@ -58,23 +59,41 @@
 
 <%= link_to 'New Dining table', new_dining_table_path %>
 
+
+
+
 <script>
 var customerId = 0
+var tableId
 
 $('.available').click(function(){
   var dining_tables_url = "<%= dining_table_update_customer_path(id: :dining_table_id).html_safe %>";
+  var customers_url = "<%= customer_update_dining_table_path(id: :customer_id).html_safe %>";
   var tableId = this.id;
   var customerId = $(this).parent().parent().find("#dining_table_customer_id").val();
+  var customerName = this.name;
 
   $("#" + tableId).attr("class", "led-red");
+  console.log("dining_table_id = " + tableId, "customer_id = " + customerId);
+
   dining_tables_url = dining_tables_url.replace("dining_table_id", tableId);
-  data = {customer_id: customerId};
+  customers_url = customers_url.replace("customer_id", customerId);
+
+  data1 = {customer_id: customerId};
+  data2 = {diningtable_id: tableId}
 
   $.ajax({
     method: "PATCH",
     url: dining_tables_url,
-    data: data
+    data: data1
   })
+
+  $.ajax({
+    method: "PATCH",
+    url: customers_url,
+    data: data2
+  })
+
   .then(function(res){
     console.log(res);
   });

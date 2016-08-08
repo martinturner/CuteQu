@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :dining_tables
 
   patch 'dining_tables/:id/update_customer' => 'dining_tables#update_customer', as: "dining_table_update_customer"
+  patch 'customers/:id/update_dining_table' => 'customers#update_dining_table', as: "customer_update_dining_table"
 
 
 

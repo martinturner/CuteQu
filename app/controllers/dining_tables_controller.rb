@@ -58,7 +58,6 @@ class DiningTablesController < ApplicationController
 
   def update_customer
     @dining_table.customer_id = params[:customer_id];
-
     return render :json => {success: @dining_table.save!}
   end
 
