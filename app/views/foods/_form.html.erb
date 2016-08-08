@@ -2,7 +2,6 @@
   <% if @food.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
-
       <ul>
       <% @food.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,7 +9,42 @@
       </ul>
     </div>
   <% end %>
+<div class=container>
+  <div class="col-md-9">
+    <div class="portlet box green">
+      <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-settings font-dark"></i>
+            <span class="caption-subject font-dark sbold uppercase">New Food Item</span>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" role="form">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Categories</label>
+                            <div class="col-md-9">
+                                <% categories = ["Starter", "Main Course", "Dessert"] %>
+                                <%= f.select :category, categories, :prompt => @food.category %>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                      
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-3 control-label">Price</label>
+                          <div class="col-md-9">
+                            <div class="input-group">
+                              <input type="text" class="form-control input-circle" placeholder="Enter Price">
+                            </div>
+                          </div>
+                    </div>
 
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   <div class="field">
     <% categories = ["Starter", "Main Course", "Dessert"] %>
     <%= f.select :category, categories, :prompt => @food.category %>
@@ -28,10 +62,7 @@
     <%= f.label :customize %><br>
     <%= f.text_area :customize %>
   </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
