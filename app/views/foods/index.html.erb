@@ -1,65 +1,20 @@
-<div class="jumbotron">
-  <h1>Food Menu</h1>
-</div>
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Starters</h3>
-  </div>
-	<div class="panel-body">
-    <div class="row">
-      <% @food_starter.each do |food|%>
-        <div class="col-sm-6 col-md-3">
-          <div class="thumbnail">
-      	     <%= link_to (image_tag food.image.url(:medium), class: 'image'), food %>
-             <%= link_to 'Add to Order', food, class: 'btn btn-flat btn-success' %>
-             <%= link_to 'Destroy', food, class: 'btn btn-flat btn-danger',method: :delete, data: { confirm: 'Are you sure?' } %>
-             <%= food.price %>
-             <%= food.name %>
-          </div>
-        </div>
-      <% end %>
+<div class="portlet box yellow">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-gift">
+      </i>
+        Food Menu
     </div>
   </div>
+
 </div>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-       <h3 class="panel-title">Main Course</h3>
-    </div>
-      	<div class="panel-body">
-          <div class="row">
-            <% @food_main_course.each do |food| %>
-              <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-            	     <%= link_to (image_tag food.image.url(:medium), class: 'image'), food %>
-                   <%= link_to 'Add to Order', food, class: 'btn btn-flat btn-success' %>
-                   <%= food.price %>
-                   <%= food.name %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-</div>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-       <h3 class="panel-title">Desserts</h3>
-    </div>
-      	<div class="panel-body">
-          <div class="row">
-            <% @food_dessert.each do |food| %>
-              <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-            	     <%= link_to (image_tag food.image.url(:medium), class: 'image'), food %>
-                   <%= link_to 'Add to Order', food, class: 'btn btn-flat btn-success' %>
-                   <%= food.price %>
-                   <%= food.name %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-</div>
+<%= link_to 'New Food', new_food_path, class: 'btn btn-flat btn-primary' %>
+<%= link_to "Confirm Order", foods_path , class: 'btn btn-flat btn-primary'%>
 
-<%= link_to 'New Food', new_food_path %>
+<%= render 'foods', foods:  @food_starter, title: 'Starters' %>
+
+<%= render 'foods', foods:  @food_main_course, title: 'Main Course' %>
+
+<%= render 'foods', foods:  @food_dessert, title: 'Desserts' %>
