@@ -7,7 +7,6 @@ class DiningTablesController < ApplicationController
     @dining_tables = DiningTable.all.order(:id)
     @customers = Customer.where(diningtable_id: nil)
     @dining_table = DiningTable.new
-    gon.dining_table = @dining_tables
   end
 
   # GET /dining_tables/1
