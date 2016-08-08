@@ -2,18 +2,20 @@
 <html lang="en">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
+
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, customer-scale=1">
-        <title>CuteQu :)</title>
+        <title>CuteQu Admin :)</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
         <meta content="" name="author" />
-        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+          <%= stylesheet_link_tag 'admin/application', media: 'all', 'data-turbolinks-track' => true %>
     </head>
-<body>
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
+  <%= render 'layouts/admin/header' %>
+
 
 <%= yield %>
 
