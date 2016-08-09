@@ -1,20 +1,18 @@
-<div class="portlet box yellow">
-  <div class="portlet-title">
-    <div class="caption">
-      <i class="fa fa-gift">
-      </i>
-        Food Menu
+<div class="container">
+  <div class="portlet box yellow">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-gift">
+        </i>
+          Food Menu
+      </div>
+    </div>
+    <div class="portlet-body">
+        <%= render 'foods', foods:  @food_starter, title: 'Starters' %>
+
+        <%= render 'foods', foods:  @food_main_course, title: 'Main Course' %>
+
+        <%= render 'foods', foods:  @food_dessert, title: 'Desserts' %>
     </div>
   </div>
-
 </div>
-
-
-<%= link_to 'New Food', new_food_path, class: 'btn btn-flat btn-primary' %>
-<%= link_to "Confirm Order", foods_path , class: 'btn btn-flat btn-primary'%>
-
-<%= render 'foods', foods:  @food_starter, title: 'Starters' %>
-
-<%= render 'foods', foods:  @food_main_course, title: 'Main Course' %>
-
-<%= render 'foods', foods:  @food_dessert, title: 'Desserts' %>
