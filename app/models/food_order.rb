@@ -9,6 +9,6 @@
 #
 
 class FoodOrder < ActiveRecord::Base
+  has_many :foods
   belongs_to :customer
-  belongs_to :food
 end

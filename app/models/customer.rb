@@ -13,6 +13,6 @@
 #
 
 class Customer < ActiveRecord::Base
-    has_many :food_orders
+    has_one :food_order
     has_one :dining_table
 end
