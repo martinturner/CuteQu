@@ -33,7 +33,7 @@ class DiningTablesController < ApplicationController
 
     respond_to do |format|
       if @dining_table.save
-        format.html { redirect_to @dining_table, notice: 'Dining table was successfully created.' }
+        format.html { redirect_to dining_tables_path, notice: 'Dining table was successfully created.' }
         format.json { render :show, status: :created, location: @dining_table }
       else
         format.html { render :new }

@@ -1,19 +1,27 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Pk template name:</strong>
-  <%= @customer.pk_template_name %>
-</p>
-
-<p>
-  <strong>Order:</strong>
-  <%= @customer.order_id %>
-</p>
-
-<p>
-  <strong>Total price:</strong>
-  <%= @customer.total_price %>
-</p>
-
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+  <div class="portlet light portlet-fit">
+    <div class="portlet-title">
+      <div class="caption">
+        <h1 class="fa fa-comments">
+            Hello
+        </h1>
+      </div>
+        <div class="portlet-body">
+          <div class="table-scrollable">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= @customer.name %> </td>
+                  <td><%= link_to 'Order here!', foods_path , class: 'btn green-haze'%></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>

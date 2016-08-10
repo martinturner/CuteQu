@@ -2,10 +2,11 @@
 #
 # Table name: food_orders
 #
-#  id         :integer          not null, primary key
-#  food_id    :jsonb
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  food_id     :jsonb
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  customer_id :integer
 #
 
 class FoodOrder < ActiveRecord::Base

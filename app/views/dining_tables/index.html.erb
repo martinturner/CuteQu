@@ -1,61 +1,34 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Dining Tables</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @dining_tables.each do |dining_table| %>
-      <tr>
-        <td style="vertical-align:middle;" >Table <%= dining_table.name %></td>
-        <td id="name"></td>
-        <td style="vertical-align:middle;">
-          <div>
-           <div class="led-box">
-             <div id="<%= dining_table.id %>" class="<%= dining_table.get_css%>"></div>
-           </div>
-          </div>
-        </td>
-        <td><%= form_for(@dining_table) do |f| %>
-          <% if @dining_table.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@dining_table.errors.count, "error") %> prohibited this dining_table from being saved:</h2>
-              <ul>
-              <% @dining_table.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
-          <div class="form-group">
-            <label for="select" class="col-lg-2 control-label"></label>
-            <div class="col-lg-10">
-              <%= f.select :customer_id, options_for_select(@customers.map{|cus| [cus.name,cus.id]}), prompt: 'Select Customer', id: "#{dining_table.id}-customer-select" %>
+<div class="container">
+  <div class="col-md-12">
+    <div class="portlet box green">
+      <div class="portlet-title">
+        <div class="caption">
+          <i class="icon-settings font-dark"></i>
+          <span class="caption-subject font-dark sbold uppercase">Table Status</span>
+        </div>
+      </div>
+      <div class="portlet-body form">
+        <form action="#" class="form-horizontal">
+          <div class="form-body">
+            <div class="form-group">
+              <div class="col-md-4">
+                <table>
+                  <% @dining_tables.each do |dining_table| %>
+                    <tr>
+                      <div class="led-box">
+                        <div data-toggle="modal" id="<%= dining_table.id %>" class="<%= dining_table.get_css %>"></div>
+                      </div>
+                    <tr>
+                  <% end %>
+                </table>
+              </div>
             </div>
           </div>
-          <div class="actions">
-          </div>
-        <% end %>
-        </td>
-
-        <td>
-          <button class="available" id="<%= dining_table.id %>" >Assign</button>
-          <button class="unavailable" id="<%= dining_table.id %>">Reset</button>
-          <td><%= link_to 'Destroy', dining_table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <%= link_to 'New Dining table', new_dining_table_path %>
 
 
