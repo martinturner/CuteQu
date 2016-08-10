@@ -13,6 +13,7 @@
   <tbody>
     <% @food_orders.each do |food_order| %>
       <tr>
+        <td><%= food_order.customer_id %></td>
         <td><%= food_order.food_id %></td>
         <td><%= link_to 'Show', food_order %></td>
         <td><%= link_to 'Edit', edit_food_order_path(food_order) %></td>
