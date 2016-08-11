@@ -19,4 +19,11 @@ class Food < ActiveRecord::Base
   belongs_to :food_order
   has_attached_file :image, styles: { large: "600x600#", medium: "200x300#", thumb: "200x200#" }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
+  private
+  def order_present
+    if FoodOrder.nil?
+      errors.add(:FoodOrder, "Not a Valid Order.")
+    end
+  end
 end

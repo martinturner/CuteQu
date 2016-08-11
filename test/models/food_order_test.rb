@@ -7,6 +7,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  customer_id :integer
+#  total_price :decimal(, )
 #
 
 require 'test_helper'

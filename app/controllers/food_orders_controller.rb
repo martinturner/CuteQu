@@ -4,12 +4,13 @@ class FoodOrdersController < ApplicationController
   # GET /food_orders
   # GET /food_orders.json
   def index
-    @food_orders = FoodOrder.all
+    @food = current_order.foods.new
   end
 
   # GET /food_orders/1
   # GET /food_orders/1.json
   def show
+    @food_orders = current_order.food_orders
   end
 
   # GET /food_orders/new
