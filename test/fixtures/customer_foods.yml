@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: customer_foods
+#
+#  id          :integer          not null, primary key
+#  customer_id :integer
+#  food_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  status      :boolean
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 
+  food_id: 
+
+two:
+  customer_id: 
+  food_id: 

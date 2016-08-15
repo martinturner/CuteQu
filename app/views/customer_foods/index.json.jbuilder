@@ -1,0 +1,1 @@
+json.array! @customer_foods, partial: 'customer_foods/customer_food', as: :customer_food

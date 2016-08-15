@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Customer Foods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Food</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customer_foods.each do |customer_food| %>
+      <tr>
+        <td><%= customer_food.customer %></td>
+        <td><%= customer_food.food %></td>
+        <td><%= link_to 'Show', customer_food %></td>
+        <td><%= link_to 'Edit', edit_customer_food_path(customer_food) %></td>
+        <td><%= link_to 'Destroy', customer_food, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

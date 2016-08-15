@@ -1,0 +1,2 @@
+module CustomerFoodsHelper
+end

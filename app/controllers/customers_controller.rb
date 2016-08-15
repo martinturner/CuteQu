@@ -5,12 +5,12 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
-    @food_orders = Customer.all
   end
 
   # GET /customers/1
   # GET /customers/1.json
   def show
+    @customers = Food.where(customer_id: @customer.id).order(:id)
   end
 
   # GET /customers/new

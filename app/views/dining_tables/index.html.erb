@@ -1,10 +1,15 @@
-<div class="container">
-  <div class="col-md-12">
-    <div class="portlet box green">
+
+  <div class="col-md-12"  style="text-align:center">
+    <div class="portlet box blue-hoki">
       <div class="portlet-title">
         <div class="caption">
           <i class="icon-settings font-dark"></i>
           <span class="caption-subject font-dark sbold uppercase">Table Status</span>
+        </div>
+        <div class="actions">
+          <a href="javascript:;">
+            <%= link_to  new_dining_table_path, class: "btn btn-default btn-sm" do %>
+            <i class="fa fa-plus"></i> Add Table <% end %>
         </div>
       </div>
       <div class="portlet-body form">
@@ -15,9 +20,15 @@
                 <table>
                   <% @dining_tables.each do |dining_table| %>
                     <tr>
-                      <div class="led-box">
-                        <div data-toggle="modal" id="<%= dining_table.id %>" class="<%= dining_table.get_css %>"></div>
-                      </div>
+                      <% if dining_table.isAvailable? %>
+                        <div class="table-box">
+                          <div id="<%= dining_table.id %>" data-toggle="modal" data-target=".green-status" class="chooseTable btn green-meadow table-size">Table <%= dining_table.id %></div>
+                        </div>
+                      <% else %>
+                        <div class="table-box">
+                          <div id="<%= dining_table.id %>" data-toggle="modal" data-target=".red-status" class="chooseTable btn red table-size">Table <%= dining_table.id %></div>
+                        </div>
+                      <% end %>
                     <tr>
                   <% end %>
                 </table>
@@ -28,24 +39,82 @@
       </div>
     </div>
   </div>
+<br><br>
+
+<div class="modal green-status bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h5 class="modal-title" id="gridSystemModalLabel">Assign Table</h5>
+        </div>
+        <div class="modal-body">
+          <table class="table table-boarder">
+            <tr>
+              <td align="center" >#</td>
+              <td align="center" colspan="1">Customer</td>
+              <td></td>
+              <td></td>
+
+            </tr>
+            <% @customers.each do |cus| %>
+              <tr>
+                <td align="center"> <%= cus.id % 100 %> </td>
+                <td align="center"> <%= cus.name %> </td>
+                <td align="right"> <button id="<%= cus.id %>" type="button" class="assign btn red" data-dismiss="modal">Assign</button> <td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<%= link_to 'New Dining table', new_dining_table_path %>
 
-
-
+<div class="modal red-status bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+          <button type="button" class="btn green-meadow reset" data-dismiss="modal">Available</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 var customerId = 0
-var tableId
+var tableId = 0
 
-$('.available').click(function(){
+// $(".dining_table_customer_id").select2({
+//     ajax: {
+//         url: 'dining_tables/select_customer',
+//         dataType: 'json',
+//         type: "GET"
+//     }
+// });
+
+$('.chooseTable').click(function(){
+  tableId = this.id;
+
+  console.log("dining_table_id = " + tableId)
+});
+
+
+
+$('.assign').click(function(){
   var dining_tables_url = "<%= dining_table_update_customer_path(id: :dining_table_id).html_safe %>";
   var customers_url = "<%= customer_update_dining_table_path(id: :customer_id).html_safe %>";
-  var tableId = this.id;
-  var customerId = $(this).parent().parent().find("#dining_table_customer_id").val();
+  // var customerId = $(this).parent().parent().find("#dining_table_customer_id").val();
   var customerName = this.name;
-
-  $("#" + tableId).attr("class", "led-red");
+  var customerId = this.id
+  $("#" + tableId).attr("class", "btn red table-size");
   console.log("dining_table_id = " + tableId, "customer_id = " + customerId);
 
   dining_tables_url = dining_tables_url.replace("dining_table_id", tableId);
@@ -53,7 +122,7 @@ $('.available').click(function(){
 
   data1 = {customer_id: customerId};
   data2 = {diningtable_id: tableId}
-
+  console.log(customers_url)
   $.ajax({
     method: "PATCH",
     url: dining_tables_url,
@@ -71,12 +140,11 @@ $('.available').click(function(){
   });
 });
 
-$('.unavailable').click(function(){
+$('.reset').click(function(){
   var dining_tables_url = "<%= dining_table_update_customer_path(id: :dining_table_id).html_safe %>";
-  var tableId = this.id;
   console.log("dining_table_id = " + tableId, "customer_id = " + customerId);
 
-  $("#" + tableId).attr("class", "led-green");
+  $("#" + tableId).attr("class", "green-status btn green-meadow table-size");
   dining_tables_url = dining_tables_url.replace("dining_table_id", tableId)
   data = {customer_id: null};
 

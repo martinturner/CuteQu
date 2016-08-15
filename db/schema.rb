@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810040545) do
+ActiveRecord::Schema.define(version: 20160811084640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customer_foods", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "food_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "status"
+  end
+
+  add_index "customer_foods", ["customer_id"], name: "index_customer_foods_on_customer_id", using: :btree
+  add_index "customer_foods", ["food_id"], name: "index_customer_foods_on_food_id", using: :btree
+
+  create_table "customer_orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "food_id"
+    t.boolean  "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "customer_orders", ["customer_id"], name: "index_customer_orders_on_customer_id", using: :btree
+  add_index "customer_orders", ["food_id"], name: "index_customer_orders_on_food_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.text     "pk_template_name"
@@ -24,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160810040545) do
     t.datetime "updated_at",       null: false
     t.integer  "diningtable_id"
     t.text     "name"
+    t.integer  "food_id"
   end
 
   create_table "dining_tables", force: :cascade do |t|
@@ -63,5 +86,9 @@ ActiveRecord::Schema.define(version: 20160810040545) do
 
   add_index "images", ["food_id"], name: "index_images_on_food_id", using: :btree
 
+  add_foreign_key "customer_foods", "customers"
+  add_foreign_key "customer_foods", "foods"
+  add_foreign_key "customer_orders", "customers"
+  add_foreign_key "customer_orders", "foods"
   add_foreign_key "images", "foods"
 end

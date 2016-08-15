@@ -16,8 +16,10 @@
 #
 
 class Food < ActiveRecord::Base
-  belongs_to :food_order
-  has_attached_file :image, styles: { large: "600x600#", medium: "200x300#", thumb: "200x200#" }
+  has_many :customers
+  has_many :customer_foods
+  has_many :customers, :through => :customer_foods
+  has_attached_file :image, styles: { large: "600x600#", medium: "200x300#", thumb: "70x70#" }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   private

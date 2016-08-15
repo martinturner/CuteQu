@@ -12,12 +12,14 @@
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Order List</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><%= @customer.name %> </td>
-                  <td><%= link_to 'Order here!', foods_path , class: 'btn green-haze'%></td>
+                
+                  <td><%= @customer.order_id %> </td>
                 </tr>
               </tbody>
             </table>

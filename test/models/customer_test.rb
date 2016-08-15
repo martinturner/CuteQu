@@ -10,6 +10,7 @@
 #  updated_at       :datetime         not null
 #  diningtable_id   :integer
 #  name             :text
+#  food_id          :integer
 #
 
 require 'test_helper'

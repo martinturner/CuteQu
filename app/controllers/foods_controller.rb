@@ -7,12 +7,12 @@ class FoodsController < ApplicationController
     @food_starter = Food.where(category: 'Starter')
     @food_main_course = Food.where(category: 'Main Course')
     @food_dessert = Food.where(category: 'Dessert')
+    @customers = Customer.all
   end
 
   # GET /foods/1
   # GET /foods/1.json
   def show
-    @food_order = Food.all
   end
 
   # GET /foods/new
@@ -28,10 +28,6 @@ class FoodsController < ApplicationController
   # POST /foods.json
   def create
     @food = Food.new(food_params)
-    @food_order = current_order
-    @food = @food_order.foods.new(food_params)
-    @food_order.save
-    session[:food_order_id] = @food_order.id
     respond_to do |format|
       if @food.save
         format.html { redirect_to @food, notice: 'Food was successfully created.' }
@@ -46,10 +42,7 @@ class FoodsController < ApplicationController
   # PATCH/PUT /foods/1
   # PATCH/PUT /foods/1.json
   def update
-    @food_order = current_order
-    @food = @food_order.foods.find(params[:id])
     @food.update_attributes(food_params)
-    @foods = @food_order.foods
     respond_to do |format|
       if @food.update(food_params)
         format.html { redirect_to @food, notice: 'Food was successfully updated.' }
@@ -65,10 +58,6 @@ class FoodsController < ApplicationController
   # DELETE /foods/1.json
   def destroy
     @food.destroy
-    @food_order = current_order
-    @food = @food_order.foods.find(params[:id])
-    @food.destroy
-    @foods = @food_order.foods
     respond_to do |format|
       format.html { redirect_to foods_url, notice: 'Food was successfully destroyed.' }
       format.json { head :no_content }

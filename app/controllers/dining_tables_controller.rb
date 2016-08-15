@@ -1,5 +1,6 @@
 class DiningTablesController < ApplicationController
   before_action :set_dining_table, only: [:show, :edit, :update, :destroy, :update_customer]
+  skip_before_filter :verify_authenticity_token
 
   # GET /dining_tables
   # GET /dining_tables.json

@@ -23,7 +23,4 @@
 //= require assets/global/plugins/morris/raphael-min.js
 //= require assets/global/plugins/counterup/jquery.waypoints.min.js
 //= require assets/global/plugins/counterup/jquery.counterup.min.js
-//= require assets/layouts/global/scripts/quick-sidebar.min.js
-//= require assets/pages/scripts/dashboard.min.js
-//= require assets/global/scripts/app.min.js
 //= require assets/layouts/layout3/scripts/layout.min.js
