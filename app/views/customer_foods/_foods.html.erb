@@ -14,8 +14,8 @@
               <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
             	     <%= link_to (image_tag food.image.url(:medium), class: 'image'), food %><br>
-                   <button class='food' id= '<%= food.id %>'>Add to Order</button>
-                   <button class='remove' id= '<%= food.id %>'>Remove from Order</button>
+                   <button class='food' id= '<%= food.id %>'>Add</button>
+                   <button class='remove' id= '<%= food.id %>'>Remove</button>
                    <%= food.price %>
                    <%= food.name %>
                 </div>

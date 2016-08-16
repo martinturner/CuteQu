@@ -24,3 +24,5 @@
 //= require assets/global/plugins/counterup/jquery.waypoints.min.js
 //= require assets/global/plugins/counterup/jquery.counterup.min.js
 //= require assets/layouts/layout3/scripts/layout.min.js
+
+var food_order = []

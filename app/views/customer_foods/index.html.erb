@@ -1,27 +1,79 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="portlet box blue-hoki">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-gift">
+        </i>
+          Food Menu
+      </div>
+    </div>
+    <div class="portlet-body">
+        <%= render 'foods', foods:  @food_starter, title: 'Starters' %>
 
-<h1>Listing Customer Foods</h1>
+        <%= render 'foods', foods:  @food_main_course, title: 'Main Course' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th>Food</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <%= render 'foods', foods:  @food_dessert, title: 'Desserts' %>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @customer_foods.each do |customer_food| %>
-      <tr>
-        <td><%= customer_food.customer %></td>
-        <td><%= customer_food.food %></td>
-        <td><%= link_to 'Show', customer_food %></td>
-        <td><%= link_to 'Edit', edit_customer_food_path(customer_food) %></td>
-        <td><%= link_to 'Destroy', customer_food, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="modal order bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h5 class="modal-title" id="gridSystemModalLabel">Your Order</h5></div>
+      <div class="modal-body">
 
-<br>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var food_order = JSON.parse(localStorage.getItem('food')) || [];
+
+
+$('.food').click(function(){
+  food_id = this.id
+  console.log(food_order);
+  food_order.push(food_id)
+  // food_order.push(JSON.parse(localStorage.getItem('food')));
+  console.log(food_order)
+  for (i = 0; i < food_order.length; i++) {
+    $.getJSON( "/foods/" + food_order[i], function( food ) {
+      // content += "test" + food.name + "<br>";
+      console.log(food.name, food.price)
+    });
+  }
+  localStorage.setItem('food', JSON.stringify(food_order));
+});
+
+$('.remove').click(function(){
+  var element = this.id
+  var index = food_order.indexOf(element);
+  if (index >= 0) {
+    food_order.splice( index, 1 );
+  }
+  console.log(food_order)
+});
+
+// $('.test1').click(function(){
+//   content = "";
+//
+//   console.log(food_order);
+//   for (i = 0; i < food_order.length; i++) {
+//     $.getJSON( "/foods/" + food_order[i], function( food ) {
+//       content += "test" + food.name + "<br>";
+//       console.log(food.name)
+//
+//     });
+//   }
+// });
+
+
+
+</script>

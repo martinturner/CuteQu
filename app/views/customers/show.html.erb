@@ -18,10 +18,11 @@
               <tbody>
                 <tr>
                   <td><%= @customer.name %> </td>
-                
                   <td><%= @customer.order_id %> </td>
+
                 </tr>
               </tbody>
+              <%= link_to 'Add Order', new_customer_customer_food_path(customer_id: @customer.id) %> 
             </table>
           </div>
         </div>

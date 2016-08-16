@@ -1,16 +1,20 @@
 class CustomerFoodsController < ApplicationController
   before_action :set_customer_food, only: [:show, :edit, :update, :destroy]
-  before_action :set_food, except: [:new]
+  before_action :set_food, except: [:new, :index, :show]
   # GET /customer_foods
   # GET /customer_foods.json
   def index
-    @customer_foods = CustomerFood.all
-    @foods = Food.all
+    @food_starter = Food.where(category: 'Starter')
+    @food_main_course = Food.where(category: 'Main Course')
+    @food_dessert = Food.where(category: 'Dessert')
   end
 
   # GET /customer_foods/1
   # GET /customer_foods/1.json
   def show
+    @food_starter = Food.where(category: 'Starter')
+    @food_main_course = Food.where(category: 'Main Course')
+    @food_dessert = Food.where(category: 'Dessert')
   end
 
   # GET /customer_foods/new

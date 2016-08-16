@@ -1,53 +1,48 @@
-<div class="container">
-  <div class="portlet box yellow">
-    <div class="portlet-title">
+<div class="portlet">
+  <div class="portlet-title">
       <div class="caption">
-        <i class="fa fa-gift">
-        </i>
-          Food Menu
+          <i class="fa fa-bell-o">
+
+          </i>Customer Order List
       </div>
-    </div>
-    <div class="portlet-body">
-        <%= render 'foods', foods:  @food_starter, title: 'Starters' %>
-
-        <%= render 'foods', foods:  @food_main_course, title: 'Main Course' %>
-
-        <%= render 'foods', foods:  @food_dessert, title: 'Desserts' %>
-    </div>
   </div>
-</div>
-
-<div class="modal order bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h5 class="modal-title" id="gridSystemModalLabel">Your Order</h5></div>
-      <div class="modal-body">
-
+  <div class="portlet-body" style="display: block;">
+      <div class="table-scrollable">
+          <table class="table table-striped table-bordered table-advance table-hover">
+              <thead>
+                  <tr>
+                      <th>
+                          <i class="fa fa-television"></i> Food </th>
+                      <th class="hidden-xs">
+                          <i class="fa fa-user"></i> Name </th>
+                      <th>
+                          <i class="fa fa-shopping-cart"></i> Price</th>
+                      <th> </th>
+                  </tr>
+              </thead>
+              <tbody>
+                
+                    <td class="highlight">
+                        <p id="name"></p>
+                    </td>
+                    <td>
+                      <p id="price"></p>
+                    </td>
+              </tbody>
+          </table>
       </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
   </div>
-</div>
+  </div>
 
 <script>
-var food_order = []
-$('.food').click(function(){
-  food_id = this.id
-  food_order.push(food_id)
-  console.log(food_order)
-});
+food_order = JSON.parse(localStorage.getItem('food')) || [];
+for (i = 0; i < food_order.length; i++) {
+  $.getJSON( "/foods/" + food_order[i], function( food ) {
+    // content += "test" + food.name + "<br>";
+    console.log(food.name, food.price)
+    document.getElementById("name").innerHTML = '<table>'+'<tr>'+'<td>' + food.name +'</table>';
+    document.getElementById("price").innerHTML =  '<table>'+'</td>'+'</tr>'+'<td>' + food.price + '</td>'+'</table>';
+  });
 
-$('.remove').click(function(){
-  var element = this.id
-  var index = food_order.indexOf(element);
-  if (index >= 0) {
-    food_order.splice( index, 1 );
-  }
-  console.log(food_order)
-});
-
+}
 </script>
