@@ -10,7 +10,6 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
-    @customers = Food.where(customer_id: @customer.id).order(:id)
   end
 
   # GET /customers/new
@@ -67,6 +66,11 @@ class CustomersController < ApplicationController
     end
   end
 
+  def update_food
+    @customer.food_order = params[:food_order];
+    return render :jsonb => {success: @customer.save!}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
@@ -75,6 +79,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:pk_template_name, :order_id, :total_price, :name, :diningtable_id)
+      params.require(:customer).permit(:pk_template_name, :order_id, :total_price, :name, :diningtable_id, :food_order, :data)
     end
 end

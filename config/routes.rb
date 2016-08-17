@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   resources :foods
   resources :dining_tables
 
+  get 'foods/all' => 'foods#all_foods', as: "food_all_foods"
+
   patch 'dining_tables/:id/update_customer' => 'dining_tables#update_customer', as: "dining_table_update_customer"
   patch 'customers/:id/update_dining_table' => 'customers#update_dining_table', as: "customer_update_dining_table"
+  patch 'customers/:id/update_food' => 'customers#update_food', as: "customer_update_food" 
 
 
-
-    root 'customers#new'
+  root 'customers#new'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

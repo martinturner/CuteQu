@@ -11,6 +11,10 @@ class FoodsController < ApplicationController
     @customers = Customer.all
   end
 
+  def all_foods
+    @foods = Food.all
+    render :json => {foods: @foods}
+  end
   # GET /foods/1
   # GET /foods/1.json
   def show
@@ -54,6 +58,7 @@ class FoodsController < ApplicationController
       end
     end
   end
+
 
   # DELETE /foods/1
   # DELETE /foods/1.json

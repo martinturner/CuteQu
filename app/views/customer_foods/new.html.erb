@@ -8,41 +8,38 @@
   </div>
   <div class="portlet-body" style="display: block;">
       <div class="table-scrollable">
-          <table class="table table-striped table-bordered table-advance table-hover">
-              <thead>
-                  <tr>
-                      <th>
-                          <i class="fa fa-television"></i> Food </th>
-                      <th class="hidden-xs">
-                          <i class="fa fa-user"></i> Name </th>
-                      <th>
-                          <i class="fa fa-shopping-cart"></i> Price</th>
-                      <th> </th>
-                  </tr>
-              </thead>
-              <tbody>
-                
-                    <td class="highlight">
-                        <p id="name"></p>
-                    </td>
-                    <td>
-                      <p id="price"></p>
-                    </td>
-              </tbody>
+          <table class="table table-striped table-bordered table-advance table-hover" id="order" =>
           </table>
       </div>
   </div>
+
+  <a href="#" id="confirm-order">Confirm Order</a>
+  <%= link_to "Back to Menu", customer_customer_foods_path %>
   </div>
 
 <script>
 food_order = JSON.parse(localStorage.getItem('food')) || [];
+var customer_url = "<%= customer_path(@customer).html_safe %>";
+var update_customer_order_url = "<%= customer_update_food_path(id: @customer.id).html_safe %>";
+
+var content = '<thead><tr><th><i class="fa fa-television"></i> Food </th><th><i class="fa fa-shopping-cart"></i> Price</th></tr></thead>';
 for (i = 0; i < food_order.length; i++) {
   $.getJSON( "/foods/" + food_order[i], function( food ) {
-    // content += "test" + food.name + "<br>";
-    console.log(food.name, food.price)
-    document.getElementById("name").innerHTML = '<table>'+'<tr>'+'<td>' + food.name +'</table>';
-    document.getElementById("price").innerHTML =  '<table>'+'</td>'+'</tr>'+'<td>' + food.price + '</td>'+'</table>';
+    content += '<tr>' + '<td>' + food.name + '</td>' + '<td>' + food.price + '</td>' + '</tr>';
+    document.getElementById("order").innerHTML =  content;
   });
-
 }
+
+$('#confirm-order').click(function(){
+  $.ajax({
+    method: "PATCH",
+    url: update_customer_order_url,
+    data: food_order
+  })
+  .then(function(res){
+    window.location.assign(customer_url);
+    // $(".confirm").click();
+  });
+});
+
 </script>

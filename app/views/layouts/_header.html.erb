@@ -2,7 +2,12 @@
   <div class="page-header-menu">
       <div class="hor-menu">
         <ul class="nav navbar-nav">
-        
+          <li class>
+            <%= link_to "Menu", customer_customer_foods_path(customer_id: @customer.id) %>
+          </li>
+          <li>
+            <%= link_to "Your Order", new_customer_customer_food_path(customer_id: @customer.id) %>
+          </li>
         </ul>
       </div>
   </div>
