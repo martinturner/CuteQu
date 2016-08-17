@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy, :update_dining_table]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :update_dining_table, :update_food]
   skip_before_filter :verify_authenticity_token
   # GET /customers
   # GET /customers.json
@@ -67,8 +67,14 @@ class CustomersController < ApplicationController
   end
 
   def update_food
-    @customer.food_order = params[:food_order];
-    return render :jsonb => {success: @customer.save!}
+    ary = @customer.food_order
+    params[:customer_food_order].each do |cus_foods|
+      ary.push("#{cus_foods}")
+    end
+    # raise params[:customer_food_order].to_json;
+    # jj = params[:customer_food_order].to_json;
+    @customer.food_order = ary;
+    return render :json => {success: @customer.save!}
   end
 
   private

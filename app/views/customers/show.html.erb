@@ -16,13 +16,14 @@
                 </tr>
               </thead>
               <tbody>
+
                 <tr>
                   <td><%= @customer.name %> </td>
-                  <td></td>
-
+              
                 </tr>
+
               </tbody>
-              <%= link_to 'Add Order', new_customer_customer_food_path(customer_id: @customer.id) %>
+              <%= link_to 'Add Order', customer_customer_foods_path(customer_id: @customer.id) %>
             </table>
           </div>
         </div>

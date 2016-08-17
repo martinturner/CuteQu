@@ -5,6 +5,12 @@
 
           </i>Customer Order List
       </div>
+      <div class="actions">
+        Clear All Menu
+        <a class="btn btn-circle btn-icon-only btn-default" onClick="window.location.reload()" id="clear">
+              <i class="icon-trash"></i>
+        </a>
+
   </div>
   <div class="portlet-body" style="display: block;">
       <div class="table-scrollable">
@@ -21,7 +27,7 @@
 food_order = JSON.parse(localStorage.getItem('food')) || [];
 var customer_url = "<%= customer_path(@customer).html_safe %>";
 var update_customer_order_url = "<%= customer_update_food_path(id: @customer.id).html_safe %>";
-
+console.log(food_order)
 var content = '<thead><tr><th><i class="fa fa-television"></i> Food </th><th><i class="fa fa-shopping-cart"></i> Price</th></tr></thead>';
 for (i = 0; i < food_order.length; i++) {
   $.getJSON( "/foods/" + food_order[i], function( food ) {
@@ -30,16 +36,23 @@ for (i = 0; i < food_order.length; i++) {
   });
 }
 
+data1 = {customer_food_order: food_order}
 $('#confirm-order').click(function(){
   $.ajax({
     method: "PATCH",
     url: update_customer_order_url,
-    data: food_order
+    data: data1
   })
   .then(function(res){
     window.location.assign(customer_url);
     // $(".confirm").click();
   });
+  food_order = []
+  localStorage.setItem('food', JSON.stringify(food_order));
 });
 
+$('#clear').click(function(){
+  food_order = []
+  localStorage.setItem('food', JSON.stringify(food_order));
+});
 </script>

@@ -11,6 +11,7 @@
 #  diningtable_id   :integer
 #  name             :text
 #  food_id          :integer
+#  food_order       :jsonb
 #
 
 require 'test_helper'

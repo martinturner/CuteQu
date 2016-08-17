@@ -36,13 +36,15 @@
 <script>
 var food_order = JSON.parse(localStorage.getItem('food')) || [];
 
-
 $('.food').click(function(){
-  food_id = this.id
-  console.log(food_order);
+  var food_id = this.id
+  if (food_order != []) {
+    var index = food_order.indexOf(food_id);
+    if (index >= 0) {
+      food_order.splice( index, 1 );
+    }
+  }
   food_order.push(food_id)
-  // food_order.push(JSON.parse(localStorage.getItem('food')));
-  console.log(food_order)
   for (i = 0; i < food_order.length; i++) {
     $.getJSON( "/foods/" + food_order[i], function( food ) {
       // content += "test" + food.name + "<br>";
@@ -50,6 +52,8 @@ $('.food').click(function(){
     });
   }
   localStorage.setItem('food', JSON.stringify(food_order));
+  console.log(food_order);
+
 });
 
 $('.remove').click(function(){
@@ -59,6 +63,7 @@ $('.remove').click(function(){
     food_order.splice( index, 1 );
   }
   console.log(food_order)
+  localStorage.setItem('food', JSON.stringify(food_order));
 });
 
 // $('.test1').click(function(){
